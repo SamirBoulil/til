@@ -1,0 +1,40 @@
+AppBundle\Entity\Document:
+  type: entity
+  table: document
+  fields:
+    id:
+      type: integer
+      id: true
+      generator:
+        strategy: AUTO
+    title:
+      type: string
+      length: 255
+    baseline:
+      type: string
+      length: 255
+      nullable: true
+    content:
+      type: text
+  manyToMany:
+    tags:
+      targetEntity: AppBundle\Entity\Tag
+      joinTable:
+        name: documents_tags
+        joinColumns:
+          document_id:
+            referencedColumnName: id
+        inverseJoinColumns:
+          tag_id:
+            referencedColumnName: id
+    usersLike:
+      targetEntity: AppBundle\Entity\User
+      mappedBy: likedDocuments
+  manyToOne:
+    user:
+      targetEntity: AppBundle\Entity\User
+      inversedBy: documents 
+      joinColumn:
+        name: user_id
+        referencedColumnName: id
+

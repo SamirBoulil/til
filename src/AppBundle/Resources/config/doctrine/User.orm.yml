@@ -1,0 +1,45 @@
+AppBundle\Entity\User:
+  type: entity
+  table: user
+  fields:
+    id:
+      type: integer
+      id: true
+      generator:
+        strategy: AUTO
+    username:
+      type: string
+      length: 255
+      unique: true
+    email:
+      type: string
+      length: 255
+      unique: true
+    password:
+      type: string
+      length: 255
+    image:
+      type: string
+      length: 255
+      nullable: true
+    isActive:
+      type: boolean
+      options:
+          default: true
+  oneToMany:
+    documents:
+      targetEntity: AppBundle\Entity\Document
+      mappedBy: user
+  manyToMany:
+    likedDocuments:
+      targetEntity: AppBundle\Entity\Document
+      column_name: likedDocument
+      joinTable:
+        name: user_likes_documents
+        joinColumns:
+          user_id:
+            referencedColumnName: id
+        inverseJoinColumns:
+          document_id:
+            referencedColumnName: id
+
