@@ -83,9 +83,7 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * Get username
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getUsername()
     {
@@ -131,9 +129,7 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * Get password
-     *
-     * @return string
+     * {@inheritDoc}
      */
     public function getPassword()
     {
@@ -256,6 +252,9 @@ class User implements UserInterface, \Serializable
         return $this->likedDocuments;
     }
 
+    /*
+     * {@inheritDoc}
+     */
     public function eraseCredentials()
     {
     }
@@ -269,7 +268,7 @@ class User implements UserInterface, \Serializable
             $this->password,
             // see section on salt below
             // $this->salt,
-        ));
+            ));
     }
 
     /** @see \Serializable::unserialize() */
@@ -281,7 +280,22 @@ class User implements UserInterface, \Serializable
             $this->password,
             // see section on salt below
             // $this->salt
-        ) = unserialize($serialized);
+            ) = unserialize($serialized);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getRoles()
+    {
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getSalt()
+    {
+
     }
 }
-
